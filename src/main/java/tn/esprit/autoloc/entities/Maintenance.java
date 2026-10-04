@@ -1,9 +1,12 @@
 package tn.esprit.autoloc.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +25,8 @@ public class Maintenance {
     private LocalDate dateDebut;
     private LocalDate dateFin;
     private String description;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "vehicule_id")
+    private Vehicule vehicule;
 }
