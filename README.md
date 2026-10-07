@@ -1,38 +1,139 @@
-# &#x20;  # AutoLoc
+# 🚗 AutoLoc — Gestion de location de véhicules
 
-# 
+## 📌 Description
 
-# &#x20;  Plateforme de gestion de location de véhicules multi-agences.
+**AutoLoc** est une application web de gestion de location de véhicules développée avec **Java 17 et Spring Boot**. Le projet permet de gérer les principales fonctionnalités d'une agence de location, notamment les véhicules, agences, clients, employés, réservations, contrats, paiements et opérations de maintenance.
 
-# 
+L'application est conçue selon une **architecture monolithique en couches (Layered Architecture)** afin de séparer clairement les responsabilités entre la présentation, le métier, la persistance et le domaine.
 
-# &#x20;  ## Objectifs du projet
+## 🏗️ Architecture
 
-# &#x20;  - Gérer les véhicules, les réservations et les contrats de location
+Le projet est organisé autour des couches suivantes :
 
-# &#x20;  - Permettre la gestion de plusieurs agences
+* **Presentation** : contrôleurs REST et exposition des API.
+* **DTO** : transfert des données entre les différentes couches.
+* **Service** : gestion de la logique métier et des règles de gestion.
+* **Repository** : accès aux données avec Spring Data JPA.
+* **Domain** : entités métier et énumérations.
+* **Transverse** : gestion des aspects communs comme le logging, les performances et les tâches planifiées.
 
-# 
+## 🗃️ Modèle de données
 
-# &#x20;  ## Acteurs
+Le modèle métier comprend notamment :
 
-# &#x20;  - \*\*Client\*\* : consulte les véhicules et réserve
+* **Agence** : gestion des agences de location.
+* **Vehicule** : gestion des véhicules et de leur disponibilité.
+* **Equipement** : gestion des équipements associés aux véhicules.
+* **Client** : gestion des informations des clients.
+* **Employe** : gestion des employés et de leurs rôles.
+* **Reservation** : gestion des réservations.
+* **Contrat** : gestion des contrats de location.
+* **Paiement** : gestion des paiements liés aux contrats.
+* **Maintenance** : suivi des opérations de maintenance des véhicules.
 
-# &#x20;  - \*\*Agent d'agence\*\* : gère les locations et les retours
+Le projet met en œuvre plusieurs associations **JPA/Hibernate** :
 
-# &#x20;  - \*\*Responsable d'agence\*\* : suit l'activité de son agence
+* `@OneToMany`
+* `@ManyToOne`
+* `@OneToOne`
+* `@ManyToMany`
 
-# &#x20;  - \*\*Administrateur\*\* : gère les agences, les utilisateurs et les paramètres
+avec différentes stratégies de **Cascade** et de **Fetch** (`LAZY`) selon les besoins métier.
 
-# 
+## 🛠️ Technologies utilisées
 
-# &#x20;  ## Cas d'utilisation (v0)
+| Technologie        | Utilisation                         |
+| ------------------ | ----------------------------------- |
+| Java 17            | Langage de programmation            |
+| Spring Boot        | Framework principal                 |
+| Spring Data JPA    | Persistance et ORM                  |
+| Spring MVC         | API REST                            |
+| Spring AOP         | Gestion des aspects transversaux    |
+| Spring Scheduler   | Tâches planifiées                   |
+| MySQL / PostgreSQL | Base de données                     |
+| H2                 | Tests en mémoire                    |
+| Maven              | Gestion des dépendances et du build |
+| Lombok             | Réduction du code répétitif         |
+| MapStruct          | Mapping DTO, si utilisé             |
+| Swagger / OpenAPI  | Documentation des API               |
+| Git / GitHub       | Gestion de versions                 |
+| Postman            | Tests des API                       |
 
-# &#x20;  - Client : rechercher un véhicule, réserver, annuler une réservation
+## 🎯 Objectifs du projet
 
-# &#x20;  - Agent : enregistrer une location, enregistrer un retour
+L'objectif principal d'AutoLoc est de mettre en pratique les concepts de **Spring Boot, JPA/Hibernate et architecture logicielle** à travers une application concrète de gestion de location de véhicules.
 
-# &#x20;  - Responsable : consulter les statistiques de l'agence
+Le projet permet notamment de travailler sur :
 
-# &#x20;  - Administrateur : gérer les agences et les comptes
+* La conception d'un modèle de données relationnel.
+* La création et la gestion des entités JPA.
+* La gestion des associations entre entités.
+* Les stratégies de cascade et de chargement des données.
+* La création d'API REST.
+* La séparation entre entités et DTO.
+* L'implémentation de services métier.
+* La gestion de la persistance avec Spring Data JPA.
+* La documentation des API avec Swagger/OpenAPI.
+* La mise en place d'une architecture propre et évolutive.
 
+## 📂 Structure du projet
+
+```text
+src/
+└── main/
+    └── java/
+        └── com.example.demo/
+            ├── domain/
+            ├── repository/
+            ├── service/
+            ├── web/
+            │   ├── controller/
+            │   └── dto/
+            └── aspect/
+```
+
+## 🚀 Installation et exécution
+
+### Prérequis
+
+* Java 17 ou supérieur
+* Maven
+* MySQL ou PostgreSQL
+* Git
+
+### Cloner le projet
+
+```bash
+git clone https://github.com/CodeWithHoussem/projetSpringboot.git
+cd projetSpringboot
+```
+
+### Configurer la base de données
+
+Modifier le fichier :
+
+```text
+src/main/resources/application.properties
+```
+
+avec les informations de connexion à votre base de données.
+
+### Lancer l'application
+
+Avec Maven :
+
+```bash
+mvn spring-boot:run
+```
+
+Ou lancer directement la classe principale Spring Boot depuis l'IDE.
+
+## 📖 Documentation API
+
+Une documentation interactive des API peut être intégrée avec **Swagger UI / OpenAPI**, permettant de consulter et tester les différents endpoints de l'application.
+
+## 👨‍💻 Auteur
+
+**Houssem Kanzari**
+
+Projet réalisé dans le cadre de la formation en informatique et du module **ASI — Architecture des Systèmes d'Information**.

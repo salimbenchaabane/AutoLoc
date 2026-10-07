@@ -1,0 +1,11 @@
+package com.example.demo.repository;
+
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.domain.Maintenance;
+
+public interface MaintenanceRepository extends JpaRepository<Maintenance, Long> {
+
+    List<Maintenance> findByVehicule_IdVehicule(Long idVehicule);
+}
